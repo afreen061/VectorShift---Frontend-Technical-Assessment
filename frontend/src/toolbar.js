@@ -1,22 +1,49 @@
-// toolbar.js
-
 import { DraggableNode } from './draggableNode';
+import { useState } from 'react';
 
 export const PipelineToolbar = () => {
+  const [search, setSearch] = useState('');
 
-    return (
-        <div style={{ padding: '10px' }}>
-            <div style={{ marginTop: '20px', display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
-                <DraggableNode type='customInput' label='Input' />
-                <DraggableNode type='llm' label='LLM' />
-                <DraggableNode type='customOutput' label='Output' />
-                <DraggableNode type='text' label='Text' />
-                <DraggableNode type='math' label='Math' />
-<DraggableNode type='conditional' label='If/Else' />
-<DraggableNode type='delay' label='Delay' />
-<DraggableNode type='merge' label='Merge' />
-<DraggableNode type='random' label='Random' />
-            </div>
-        </div>
-    );
+  const nodesList = [
+    { type: 'customInput', label: 'Input' },
+    { type: 'llm', label: 'LLM' },
+    { type: 'customOutput', label: 'Output' },
+    { type: 'text', label: 'Text' },
+    { type: 'math', label: 'Math' },
+    { type: 'conditional', label: 'If/Else' },
+    { type: 'delay', label: 'Delay' },
+    { type: 'merge', label: 'Merge' },
+    { type: 'random', label: 'Random' },
+  ];
+
+  const filtered = nodesList.filter(n => 
+    n.label.toLowerCase().includes(search.toLowerCase())
+  );
+
+  return (
+    <div style={{ padding: '16px 24px', background: 'white', borderBottom: '1px solid #dadce0' }}>
+      {/* Search bar */}
+      <input
+        type="text"
+        placeholder="Search nodes (e.g. Math, Delay)..."
+        value={search}
+        onChange={e => setSearch(e.target.value)}
+        style={{
+          width: '100%',
+          maxWidth: '400px',
+          padding: '12px 16px',
+          border: '1px solid #dadce0',
+          borderRadius: '8px',
+          fontSize: '16px',
+          marginBottom: '16px',
+        }}
+      />
+
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
+        {filtered.map(node => (
+          <DraggableNode key={node.type} type={node.type} label={node.label} />
+        ))}
+      </div>
+    </div>
+  );
 };

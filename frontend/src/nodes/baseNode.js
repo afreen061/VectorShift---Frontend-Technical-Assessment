@@ -1,10 +1,14 @@
 import { Handle, Position } from 'reactflow';
 
-const BaseNode = ({ id, title = "Node", children, inputs = [], outputs = [], color = "bg-white" }) => {
+const BaseNode = ({ id, title = "Node", children, inputs = [], outputs = [], color = "bg-white", type }) => {
   return (
-    <div className={`${color} border border-gray-300 rounded-xl p-5 shadow-md min-w-60`}>
-      <div className="font-bold text-lg mb-3 text-gray-800">{title}</div>
-      <div className="space-y-3">{children}</div>
+    <div className={`node-${type} bg-white border border-gray-300 rounded-xl overflow-hidden shadow-md min-w-72`}>
+      <div className="font-bold text-lg p-4 text-white">
+        {title}
+      </div>
+      <div className="p-5 space-y-5">
+        {children}
+      </div>
 
       {inputs.map((input, index) => (
         <Handle
@@ -12,10 +16,12 @@ const BaseNode = ({ id, title = "Node", children, inputs = [], outputs = [], col
           type="target"
           position={Position.Left}
           id={input.id}
-          style={{ top: `${30 + index * 40}px` }}
-          className="w-3 h-3 bg-blue-500"
+          style={{ top: `${50 + index * 50}px`, background: '#1a73e8' }}
+          className="w-5 h-5 border-4 border-white"
         >
-          <div className="absolute left-[-80px] text-xs text-gray-600">{input.label}</div>
+          <div className="absolute left-[-160px] top-1/2 -translate-y-1/2 bg-white px-3 py-1 rounded-md shadow-md text-sm font-medium text-gray-700 border border-gray-200 whitespace-nowrap">
+            {input.label}
+          </div>
         </Handle>
       ))}
 
@@ -25,10 +31,12 @@ const BaseNode = ({ id, title = "Node", children, inputs = [], outputs = [], col
           type="source"
           position={Position.Right}
           id={output.id}
-          style={{ top: `${30 + index * 40}px` }}
-          className="w-3 h-3 bg-green-500"
+          style={{ top: `${50 + index * 50}px`, background: '#34a853' }}
+          className="w-5 h-5 border-4 border-white"
         >
-          <div className="absolute right-[-80px] text-xs text-gray-600">{output.label}</div>
+          <div className="absolute right-[-160px] top-1/2 -translate-y-1/2 bg-white px-3 py-1 rounded-md shadow-md text-sm font-medium text-gray-700 border border-gray-200 whitespace-nowrap">
+            {output.label}
+          </div>
         </Handle>
       ))}
     </div>

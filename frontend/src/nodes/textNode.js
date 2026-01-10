@@ -34,13 +34,14 @@ export const TextNode = ({ id, data }) => {
   };
 
   return (
-    <BaseNode
-      id={id}
-      title="Text"
-      inputs={inputHandles}
-      outputs={[{ id: `${id}-output`, label: 'output' }]}
-      color="bg-green-50"
-    >
+   <BaseNode
+  id={id}
+  title="Text"
+  inputs={inputHandles}
+  outputs={[{ id: `${id}-output`, label: 'output' }]}
+  color="bg-green-50"
+  type="text"   // ← Add this
+>
       <label className="block">
         <span className="font-medium text-gray-700">Text Template:</span>
         <textarea

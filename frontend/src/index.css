@@ -1,27 +1,161 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* ========================================= */
+/*   MIND-BLOWING GOOGLE-STYLE UI - CLEAN    */
+/* ========================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
-  font-family: 'Roboto', sans-serif;
-  background: #ffffff;
-  color: #3c4043;
+  font-family: 'Roboto', system-ui, -apple-system, sans-serif;
+  background: #f8fafc;
+  color: #202124;
+  height: 100vh;
+  overflow: hidden;
 }
 
+/* Main layout - full height, flex column */
+#root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Toolbar - fixed top, clean shadow */
+.PipelineToolbar {
+  background: white;
+  padding: 16px 24px;
+  border-bottom: 1px solid #dadce0;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  z-index: 10;
+}
+
+.draggable-node {
+  background: #1a73e8;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 15px;
+  cursor: grab;
+  text-align: center;
+  min-width: 100px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  transition: all 0.25s ease;
+  user-select: none;
+}
+
+.draggable-node:hover {
+  background: #0d68d1;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+/* Canvas area - fills remaining space */
+.PipelineUI {
+  flex: 1;
+  position: relative;
+}
+
+/* Nodes - Google card style */
 .react-flow__node {
-  @apply bg-white border border-gray-300 rounded-xl p-5 shadow-md min-w-60;
+  background: white;
+  border: 1px solid #dadce0;
+  border-radius: 12px;
+  padding: 0;
+  box-shadow: 0 1px 6px rgba(32,33,36,0.28);
+  min-width: 260px;
+  overflow: hidden;
+  transition: all 0.25s ease;
+  font-size: 14px;
 }
 
 .react-flow__node:hover {
-  @apply shadow-lg;
+  box-shadow: 0 8px 24px rgba(32,33,36,0.35);
+  transform: translateY(-4px);
 }
 
+/* Node header - clean, bold */
+.react-flow__node > div:first-child {
+  background: #f1f3f4;
+  padding: 12px 16px;
+  font-weight: 600;
+  font-size: 15px;
+  color: #202124;
+  border-bottom: 1px solid #dadce0;
+}
+
+/* Node content padding */
+.react-flow__node > div:nth-child(2) {
+  padding: 16px;
+}
+
+/* Handles - bigger, more visible, Google blue */
 .react-flow__handle {
-  @apply w-3 h-3 bg-primary border-2 border-white;
+  width: 16px !important;
+  height: 16px !important;
+  background: #1a73e8 !important;
+  border: 3px solid white !important;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  transition: transform 0.2s;
 }
 
+.react-flow__handle:hover {
+  transform: scale(1.2);
+}
+
+/* Edges - smooth, subtle */
 .react-flow__edge-path {
-  stroke: #dadce0;
-  stroke-width: 2;
+  stroke: #5f6368;
+  stroke-width: 2.5;
+}
+
+/* Submit button - prominent, floating style */
+.submit-btn {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  background: #1a73e8;
+  color: white;
+  padding: 16px 48px;
+  font-size: 17px;
+  font-weight: 500;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(26,115,232,0.4);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.submit-btn:hover {
+  background: #0d68d1;
+  transform: translateX(-50%) translateY(-4px);
+  box-shadow: 0 16px 40px rgba(26,115,232,0.5);
+}
+
+/* Inputs inside nodes - clean & focused */
+input, select, textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #1a73e8;
+  box-shadow: 0 0 0 3px rgba(26,115,232,0.15);
+}
+
+/* Textarea auto-resize helper */
+textarea {
+  min-height: 60px;
+  resize: none;
 }
